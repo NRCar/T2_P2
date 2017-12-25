@@ -10,9 +10,9 @@
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
 
-class UKF {
+class UKF
+{
 public:
-
   ///* initially set to false, set to true in first call of ProcessMeasurement
   bool is_initialized_;
 
@@ -53,7 +53,7 @@ public:
   double std_radphi_;
 
   ///* Radar measurement noise standard deviation radius change in m/s
-  double std_radrd_ ;
+  double std_radrd_;
 
   ///* Weights of sigma points
   VectorXd weights_;
@@ -67,6 +67,30 @@ public:
   ///* Sigma point spreading parameter
   double lambda_;
 
+  // Output filestreams for radar and laser NIS
+  std::ofstream radar_NIS_file_;
+  std::ofstream laser_NIS_file_;
+
+  ///* Number of sigma points
+  int n_sig_;
+
+  ///* the current NIS for radar
+  double NIS_radar_;
+
+  ///* the current NIS for laser
+  double NIS_laser_;
+
+  ///* Radar measurement noise covariance matrix
+  MatrixXd R_radar_;
+
+  ///* laser measurement noise covariance matrix
+  MatrixXd R_laser_;
+
+  // Dimension of laser measurement space
+  int n_laser_;
+
+  // Dimension of radar measurement space
+  int n_radar_;
 
   /**
    * Constructor
@@ -102,6 +126,12 @@ public:
    * @param meas_package The measurement at k+1
    */
   void UpdateRadar(MeasurementPackage meas_package);
+
+  /**
+   * Updates the state and the state covariance matrix of the UKF
+   * 
+   */
+  double UpdateCommon(MeasurementPackage meas_package, MatrixXd Zsig, int n_z);
 };
 
 #endif /* UKF_H */
