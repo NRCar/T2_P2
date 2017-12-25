@@ -18,5 +18,11 @@ Once the install for uWebSocketIO is complete, the main program can be built and
 
 NOTE: the NIS dir is to allow for the NIS valus to be outputted to files and thus plotted.
 
+The final RMSE values are shown below
+
+![alt text](https://github.com/NRCar/T2_P2/raw/master/OUTPUT/working.png "Working RMSE")
 
 
+The NIS values are as shown below:
+
+![alt text](https://github.com/NRCar/T2_P2/blob/master/OUTPUT/NIS.png "NIS")
